@@ -1,48 +1,65 @@
-# plan-to-issues-calendar
+# AI Skills
 
-予定・目標と期日から作業を分解し、GitHub IssuesまたはLinearと、Issueリンク付きのカレンダー予定を作るCodex用スキルです。
+AIごとに整理した、再利用できるスキルの公開リポジトリです。現在はCodex用のスキルを1件公開しています。
 
-## できること
+## はじめに
 
-- 期日から逆算し、完了条件・見積もり・依存関係のある作業へ分解
-- 指定したGitHubリポジトリまたはLinearプロジェクトへIssueを登録
-- IssueのURL付きでカレンダーへ登録（時刻指定がなければ終日予定）
-- 既存項目との重複確認、部分成功後の再開、登録結果の読み取り確認
+1. 下の一覧から使いたいスキルを選ぶ。
+2. スキルのREADMEで機能・接続先・入力例を確認する。
+3. スキルのフォルダを導入し、まず外部登録を伴わない入力で試す。
 
-スキルはエージェント向けの指示書です。単体で動くアプリや定期実行サービスではありません。
+## スキル一覧
 
-## 必要な環境
+| AI | スキル | 内容 |
+| --- | --- | --- |
+| Codex | [plan-to-issues-calendar](codex/skills/plan-to-issues-calendar/README.md) | 予定と期日から作業をIssueに分解し、リンク付きのカレンダー予定を作成 |
 
-- このスキルを読み込めるCodex環境
-- 利用するIssue管理サービスとカレンダーへの接続、および対象への書き込み権限
-
-具体的なツール名は固定していません。実行環境で利用できるコネクター・API・CLIを使います。カレンダーへの直接登録ができずICSファイルを生成した場合は、インポートが必要です。
-
-## インストール
-
-既存の同名フォルダがない状態で、次を実行します。既にインストール済みの場合は、内容を比較してから更新してください。
-
-```sh
-git clone https://github.com/robatodt74-byte/plan-to-issues-calendar.git "${CODEX_HOME:-$HOME/.codex}/skills/plan-to-issues-calendar"
-```
-
-## 使い方
+## リポジトリ構成
 
 ```text
-$plan-to-issues-calendar
-2026年10月30日までにポートフォリオを公開したい。
-GitHubの owner/repo でIssueに分解して、仕事用カレンダーへ追加して。
+.
+├── README.md
+├── codex/
+│   └── skills/
+│       └── plan-to-issues-calendar/
+│           ├── README.md
+│           ├── SKILL.md
+│           └── agents/
+│               └── openai.yaml
+├── shared/
+│   └── skill-standard.md
+└── templates/
+    └── skill-template.md
 ```
 
-予定名・期日と、Issueおよびカレンダーの登録先を伝えてください。会話やプロジェクトで登録先が確定済みなら、その指定を使います。不足する条件がある場合だけ確認します。
+スキル本体は `<AI名>/skills/<スキル名>/` に置きます。共通の作成ルールは `shared/`、新規作成用のひな形は `templates/` にまとめています。他のAI向けのスキルを追加するときに、対応するフォルダを増やします。
 
-「分解案だけ」「下書き」と指定した場合は外部登録しません。実際の登録を依頼した場合は、日程の一覧を示したうえで、条件が確定していれば作成を進めます。
+## インストール（Codex）
 
-## ファイル
+次のコマンドはリポジトリを手元へ取得し、対象スキルだけをCodexの個人用スキルフォルダへコピーします。`git clone` は未使用の作業フォルダで実行してください。
 
-- [SKILL.md](SKILL.md): スキルの適用条件と実行手順
-- [agents/openai.yaml](agents/openai.yaml): 表示名と呼び出し用プロンプト
+```sh
+git clone https://github.com/robatodt74-byte/plan-to-issues-calendar.git
+cd plan-to-issues-calendar
+
+skill_root="${CODEX_HOME:-$HOME/.codex}/skills"
+skill_target="$skill_root/plan-to-issues-calendar"
+mkdir -p "$skill_root"
+if [ -e "$skill_target" ]; then
+  echo "導入先が既にあります。内容を比較してから更新してください: $skill_target"
+else
+  cp -R codex/skills/plan-to-issues-calendar "$skill_target"
+fi
+```
+
+導入後はCodexの新しい会話で `$plan-to-issues-calendar` を指定して使います。実際のIssue・カレンダー登録には、それぞれのサービスへの接続と書き込み権限が必要です。
+
+以前のルート直下の構成で導入済みの場合も、今回のスキル本体の内容は同じです。更新時はリポジトリ全体ではなく `codex/skills/plan-to-issues-calendar/` の内容を配置してください。
+
+## スキルの追加
+
+[共通ルール](shared/skill-standard.md)を読み、[作成用テンプレート](templates/skill-template.md)を使って対象AIのフォルダ内に追加します。利用者向けの説明は各スキルのREADMEへ、エージェントへの指示はスキル本体へ記載します。
 
 ## 検証状況
 
-スキルの形式検証は実施済みです。実際のIssue・カレンダーへの登録を伴う動作検証は未実施です。
+現在のスキルは形式検証済みです。Issue・カレンダーへの実登録を伴う動作検証は未実施です。個別の使用例と確認方法は各スキルのREADMEを参照してください。
