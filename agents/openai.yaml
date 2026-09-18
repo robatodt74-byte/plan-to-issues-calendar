@@ -1,0 +1,6 @@
+interface:
+  display_name: "予定からIssue・カレンダー登録"
+  short_description: "予定と期日から作業を分解し、Issueとリンク付きカレンダー予定を作成"
+  default_prompt: "$plan-to-issues-calendar を使って、次の予定と期日から作業をIssueに分解し、指定のカレンダーへ追加してください。"
+policy:
+  allow_implicit_invocation: true
