@@ -12,7 +12,7 @@ AIごとに整理した、再利用できるスキルの公開リポジトリで
 
 | AI | スキル | 内容 |
 | --- | --- | --- |
-| Codex | [plan-to-issues-calendar](codex/skills/plan-to-issues-calendar/README.md) | 予定と期日から作業をIssueに分解し、リンク付きのカレンダー予定を作成 |
+| Codex | [plan](codex/skills/plan/README.md) | 予定と期日から作業をIssueに分解し、リンク付きのカレンダー予定を作成 |
 
 ## リポジトリ構成
 
@@ -21,7 +21,7 @@ AIごとに整理した、再利用できるスキルの公開リポジトリで
 ├── README.md
 ├── codex/
 │   └── skills/
-│       └── plan-to-issues-calendar/
+│       └── plan/
 │           ├── README.md
 │           ├── SKILL.md
 │           └── agents/
@@ -43,18 +43,18 @@ git clone https://github.com/robatodt74-byte/plan-to-issues-calendar.git
 cd plan-to-issues-calendar
 
 skill_root="${CODEX_HOME:-$HOME/.codex}/skills"
-skill_target="$skill_root/plan-to-issues-calendar"
+skill_target="$skill_root/plan"
 mkdir -p "$skill_root"
 if [ -e "$skill_target" ]; then
   echo "導入先が既にあります。内容を比較してから更新してください: $skill_target"
 else
-  cp -R codex/skills/plan-to-issues-calendar "$skill_target"
+  cp -R codex/skills/plan "$skill_target"
 fi
 ```
 
-導入後はCodexの新しい会話で `$plan-to-issues-calendar` を指定して使います。実際のIssue・カレンダー登録には、それぞれのサービスへの接続と書き込み権限が必要です。
+導入後はCodexの新しい会話で `$plan` を指定して使います。実際のIssue・カレンダー登録には、それぞれのサービスへの接続と書き込み権限が必要です。
 
-以前のルート直下の構成で導入済みの場合も、今回のスキル本体の内容は同じです。更新時はリポジトリ全体ではなく `codex/skills/plan-to-issues-calendar/` の内容を配置してください。
+旧名 `plan-to-issues-calendar` で導入済みの場合は、既存フォルダを `plan` に改名し、新しい `SKILL.md` と `agents/openai.yaml` に更新してください。独自の変更があれば比較して反映します。呼び出し名は `$plan` になりました。GitHubのリポジトリURLは変更していません。
 
 ## スキルの追加
 

@@ -1,5 +1,5 @@
 ---
-name: plan-to-issues-calendar
+name: plan
 description: 予定・目標と期日を入力されたとき、実行可能な作業へ分解し、指定されたGitHub IssuesまたはLinearへ登録して、Issueリンク付きの予定をカレンダーへ追加する。分解案だけを求められた場合は外部登録しない。
 ---
 

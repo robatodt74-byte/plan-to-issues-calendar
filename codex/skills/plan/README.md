@@ -1,4 +1,4 @@
-# plan-to-issues-calendar
+# plan
 
 予定・目標と期日から作業を分解し、GitHub IssuesまたはLinearと、Issueリンク付きのカレンダー予定を作るCodex用スキルです。
 
@@ -25,7 +25,7 @@
 ## 使い方
 
 ```text
-$plan-to-issues-calendar
+$plan
 2026年10月30日までにポートフォリオを公開したい。
 GitHubの owner/repo でIssueに分解して、仕事用カレンダーへ追加して。
 ```
@@ -46,7 +46,7 @@ GitHubの owner/repo でIssueに分解して、仕事用カレンダーへ追加
 ## 登録せずに試す
 
 ```text
-$plan-to-issues-calendar
+$plan
 来月末までにポートフォリオを公開したい。まず作業の分解案だけ作って。
 ```
 
